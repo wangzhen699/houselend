@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.house.dao.UserMapper">
+	<resultMap type="com.house.entity.Users" id="BasicMap">
+		<id column="u_id" jdbcType="INTEGER" property="uID" />
+		<result column="u_name" jdbcType="VARCHAR" property="uName"/>
+		<result column="u_password" jdbcType="VARCHAR" property="uPassword"/>
+		<result column="u_phone_number" jdbcType="VARCHAR" property="uPhoneNumber"/>
+		<result column="u_nickname" jdbcType="VARCHAR" property="uNickName"/>
+
+		<result column="name" jdbcType="VARCHAR" property="name"/>
+		<result column="sid" jdbcType="VARCHAR" property="sid"/>
+		<result column="email" jdbcType="VARCHAR" property="email"/>
+		<result column="qq" jdbcType="VARCHAR" property="qq"/>
+		<result column="wechat" jdbcType="VARCHAR" property="wechat"/>
+	</resultMap>
+	<!-- 登录 -->
+	<select id="login" resultMap="BasicMap" parameterType="com.house.entity.Users">
+		select * from t_users
+		where u_name=#{uName} and u_password=#{uPassword}
+	</select>
+	<!-- 注册 -->
+	<insert id="regist" parameterType="com.house.entity.Users">
+		insert into t_users values(0,#{uName},#{uPassword},#{uPhoneNumber},#{uNickName},#{uName},null,null,null,null)
+	</insert>
+
+	<!-- 检查旧密码 -->
+	<select id="checkOldPwd" resultMap="BasicMap" parameterType="com.house.entity.Users">
+		select * from t_users where u_password = #{uPassword} and u_id = #{uID}
+	</select>
+
+	<update id="updateUser" parameterType="com.house.entity.Users">
+		UPDATE t_users
+		SET 
+		u_name = #{uName},
+		u_phone_number = #{uPhoneNumber},
+		u_nickname = #{uNickName},
+		name = #{name},
+		sid = #{sid},
+		email = #{email},
+		qq = #{qq},
+		wechat = #{wechat}
+  		WHERE
+			u_id = #{uID}
+	</update>
+
+	<update id="updateUserPwd" parameterType="com.house.entity.Users">
+		UPDATE t_users
+		SET u_password = #{uPassword}
+		WHERE
+			u_id = #{uID}
+	</update>
+
+</mapper>

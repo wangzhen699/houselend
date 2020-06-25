@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!--hibernate实现数据库访问的封装-->
+    <property name="connection.url">
+      <![CDATA[
+             jdbc:mysql://127.0.0.1:3306/hibernate?useUnicode=true&characterEncoding=utf8
+            ]]>
+    </property>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">1234</property>
+
+    <!--SQL dialect
+    <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>-->
+
+
+    <!--Echo all executed SQL to stdout-->
+    <property name="show_sql">true</property>
+    <property name="format_sql">true</property>
+
+    <!--Drop and re-creat the database schema on startup-->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+
+    <!--注册实体类，全限定类名-->
+    <mapping class="com.house.entity.Admin" />
+    <mapping class="com.house.entity.House"/>
+    <mapping class="com.house.entity.Order"/>
+    <mapping class="com.house.entity.Page"/>
+    <mapping class="com.house.entity.Shoucang"/>
+    <mapping class="com.house.entity.ShoucangExample"/>
+    <mapping class="com.house.entity.UserData"/>
+    <mapping class="com.house.entity.UserHouseData"/>
+    <mapping class="com.house.entity.UserOrder"/>
+    <mapping class="com.house.entity.UserOrderData"/>
+    <mapping class="com.house.entity.Users"/>
+    <mapping class="com.house.entity.UserShoucangData"/>
+
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
